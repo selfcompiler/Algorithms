@@ -1,7 +1,7 @@
 //
 // Created by RAHUL KUMAR SINGH on 26/02/17.
 /*
- * Find Articulation point in Directed Graph
+ * Find Articulation point in Undirected Graph
  * So time complexity is same as DFS which is O(V+E)
  *
  * */
