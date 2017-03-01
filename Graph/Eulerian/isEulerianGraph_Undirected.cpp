@@ -4,6 +4,7 @@
 // This will work only for undirected graph
 // Condition for Euler Cycle = if odd degree count is Zero
 // Condition for Euler Path  = if odd degree count is = 2
+// odd degree vertex count 1 is not possible in undirected graph 
 // Condition for not Eulerian = either graph with positive degree is not connected or odd_degree count >=3
 //
 #include <cstdio>
