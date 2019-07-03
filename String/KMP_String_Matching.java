@@ -39,7 +39,7 @@ public class KMP_String_Matching {
         while (i<M){
             if(pat.charAt(i)==pat.charAt(len)){
                 len++;
-                lps[len]=len;
+                lps[i]=len;
                 i++;
             }
             else{
