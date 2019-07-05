@@ -15,13 +15,15 @@ public  final class SuperStrings {
     }
 
     /***
-     *
+     * 
      * @param text
      * @param pattern
      * @param algorithm
+     * @param seperator
      * @return
+     * @throws Exception
      */
-    public static boolean isSubString(String text,String pattern,SUBSTRING_ALGORITHM algorithm){
+    public static boolean isSubString(String text,String pattern,SUBSTRING_ALGORITHM algorithm,char seperator) throws Exception {
 
         switch (algorithm){
 
@@ -31,10 +33,13 @@ public  final class SuperStrings {
                     return isSubStringRabinKarp(text,pattern);
             case KMP:
                 return isSubStringKMPSearch(text,pattern,createFailureFunction(pattern));
+            case Z_ALGORITHM:
+                return isSubStringZAlgorithm(text,pattern,seperator);
             default:
                     return isSubStringBruteForce(text,pattern);
         }
     }
+
 
     /***
      *
@@ -171,6 +176,62 @@ public  final class SuperStrings {
             }
         }
         return false;
+    }
+    
+        /***
+     *
+     * @param text
+     * @param pattern
+     * @param seperator
+     * @return
+     */
+    public static boolean isSubStringZAlgorithm(String text,String pattern,char seperator){
+
+            String concatedString=pattern+seperator+text;
+            int zarraySize=concatedString.length();
+            int zarray[]=new int[concatedString.length()];
+            int patternLength=pattern.length();
+
+            int L,R;
+            L=0;
+            R=0;
+            for(int i=1;i<zarraySize;i++){
+
+                if(i>R){
+
+                    L=R=i;
+                    while (R < zarraySize && concatedString.charAt(R-L)==concatedString.charAt(R))
+                    {
+                        R++;
+                    }
+                    zarray[i]=R-L;
+                    R--;
+                }
+                else{
+
+                    int k=i-L;
+
+                    if(zarray[k]<(R-i+1))
+                    {
+                        zarray[i]=zarray[k];
+                    }
+                    else
+                    {
+                        L=i;
+                        while (R<zarraySize && (concatedString.charAt(R-L)==concatedString.charAt(R))){
+                            R++;
+                        }
+                        zarray[i]=R-L;
+                        R--;
+                    }
+                }
+            }
+
+            for(int i=patternLength+1;i<zarraySize;i++){
+                if(zarray[i]==patternLength)
+                    return true;
+            }
+            return false;
     }
 
 
