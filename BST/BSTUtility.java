@@ -1,6 +1,9 @@
 package Algorithms.BST;
 
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BSTUtility {
 
 
@@ -37,6 +40,31 @@ public class BSTUtility {
 
         return areKeysInRange(tree.left,lower,tree.data)&&areKeysInRange(tree.right,tree.data,higher);
 
+    }
+
+    public static boolean isBinaryTreeBSTOptimized(BinaryTreeNode<Integer> treeNode){
+
+        Queue<QueueEntry> BFSQueue=new LinkedList<>();
+
+        BFSQueue.add(new QueueEntry(treeNode,Integer.MIN_VALUE,Integer.MAX_VALUE));
+
+        QueueEntry headEntry;
+
+        while ((headEntry=BFSQueue.poll())!=null){
+
+                if(headEntry.treeNode!=null){
+
+                    if((headEntry.treeNode.data<headEntry.lower)||(headEntry.treeNode.data>headEntry.higher)){
+
+                        return false;
+                    }
+
+                    BFSQueue.add(new QueueEntry(headEntry.treeNode.left,headEntry.lower,headEntry.treeNode.data));
+                    BFSQueue.add(new QueueEntry(headEntry.treeNode.right,headEntry.treeNode.data,headEntry.higher));
+
+                }
+        }
+        return true;
     }
 
 
