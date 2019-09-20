@@ -67,5 +67,24 @@ public class BSTUtility {
         return true;
     }
 
+        public static BSTNode<Integer> firstNodeGreaterThanK(BSTNode<Integer> tree,int k){
+
+        BSTNode<Integer> subTree=tree,firstSoFar=null;
+
+        while (subTree!=null){
+
+
+            if(subTree.data>k){
+
+                firstSoFar=subTree;
+                subTree=subTree.left;
+                
+            }else {
+                
+                subTree=subTree.right;
+            }
+        }
+        return firstSoFar;
+    }
 
 }
