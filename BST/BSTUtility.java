@@ -86,5 +86,30 @@ public class BSTUtility {
         }
         return firstSoFar;
     }
+    
+        public static BSTNode<Integer> firstNodeEqualWithKWithDuplicate(BSTNode<Integer> tree,int k){
+        
+        BSTNode<Integer> subTree=tree,firstSoFar=null;
+        
+        while (subTree!=null){
+            
+            if(subTree.data<k){
+                
+                subTree=subTree.right;
+                
+            }else if(subTree.data==k){
+                
+                firstSoFar=subTree;
+                subTree=subTree.left;
+                
+            }else{
+                
+                subTree=subTree.left;
+            }
+            
+        }
+        
+        return firstSoFar;
+    }
 
 }
